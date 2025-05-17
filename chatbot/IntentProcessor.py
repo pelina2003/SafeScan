@@ -23,4 +23,14 @@ class IntentProcessor:
         for intent_data in self.intents:
             if intent_data["tag"] == intent:
                 return random.choice(intent_data["responses"])
-        return "Δεν κατάλαβα την πρόθεση."
+        return self.suggest_question()
+
+    def suggest_question(self):
+        sample_patterns = []
+        for intent_data in self.intents:
+            if intent_data["patterns"]:
+                sample_patterns.append(random.choice(intent_data["patterns"]))
+        if sample_patterns:
+            suggestions = ", ".join(f"\"{p}\"" for p in sample_patterns)
+            return f"Δεν κατάλαβα την ερώτησή σου. Δοκίμασε: {suggestions}."
+        return "Δεν κατάλαβα την πρόθεση." #Alternative message ig there are no patterns in the json file
