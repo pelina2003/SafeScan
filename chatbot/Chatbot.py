@@ -16,7 +16,7 @@ class Chatbot:
 
         self.intents_file = intents_file
         self.intent_processor = IntentProcessor(intents_file)
-        self.NLPProcessor = NLPProcessor()
+        self.nlp_processor = NLPProcessor()
         self.model_trainer = Model()
         self.hash_file = "intents.hash"
         self.model_file = "model.pkl"

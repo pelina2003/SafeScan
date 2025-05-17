@@ -13,8 +13,3 @@ if __name__ == "__main__":
             break
         response = chatbot.get_response(user_input)
         print("Chatbot:",response)
-
-def compute_file_hash(filename):
-        with open(filename, "rb") as f:
-            content = f.read()
-        return hashlib.sha256(content).hexdigest()

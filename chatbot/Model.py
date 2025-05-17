@@ -24,10 +24,10 @@ class Model:
     def predict(self,user_input):
         cleaned_input = NLPProcessor().nlp_process(user_input)
         vector = self.vectorizer.transform([cleaned_input])
-        propabilities = self.model.predict_proba(vector)[0]
-        max_prob = max(propabilities)
-        predicted_index = propabilities.argmax()
+        probabilities = self.model.predict_proba(vector)[0]
+        max_prob = max(probabilities)
+        predicted_index = probabilities.argmax()
         predicted_intent = self.model.classes_[predicted_index]
-        if max_prob <0.7:
-            return "αγνωστη πρόθεση"
+        if max_prob <0.3:
+            return "αγνωστη_πρόθεση"
         return predicted_intent
