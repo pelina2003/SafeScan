@@ -3,6 +3,7 @@ from IntentProcessor import IntentProcessor
 from Model import Model
 import hashlib
 import os
+import logging
 
 def compute_file_hash(filename):
     with open(filename, "rb") as f:
@@ -11,6 +12,8 @@ def compute_file_hash(filename):
 
 class Chatbot:
     def __init__(self,intents_file):
+        logging.basicConfig(filename='chatbot.log',level=logging.INFO)
+
         self.intents_file = intents_file
         self.intent_processor = IntentProcessor(intents_file)
         self.NLPProcessor = NLPProcessor()
@@ -28,7 +31,9 @@ class Chatbot:
 
     def get_response(self,user_input):
         intent = self.model_trainer.predict(user_input)
-        return self.intent_processor.get_response(intent)
+        response = self.intent_processor.get_response(intent)
+        logging.info(f"Input: {user_input}, Intent: {intent}, Response: {response}")
+        return response
     
     def initialize(self):
         current_hash = compute_file_hash(self.intents_file)

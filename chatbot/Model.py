@@ -1,11 +1,11 @@
 from NLPProcessor import NLPProcessor
 import joblib
-from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
 
 class Model:
     def __init__(self):
-        self.vectorizer = CountVectorizer()
+        self.vectorizer = TfidfVectorizer()
         self.model = MultinomialNB()
         
     def train(self,patterns,labels):
@@ -24,4 +24,10 @@ class Model:
     def predict(self,user_input):
         cleaned_input = NLPProcessor().nlp_process(user_input)
         vector = self.vectorizer.transform([cleaned_input])
-        return self.model.predict(vector)[0]
+        propabilities = self.model.predict_proba(vector)[0]
+        max_prob = max(propabilities)
+        predicted_index = propabilities.argmax()
+        predicted_intent = self.model.classes_[predicted_index]
+        if max_prob <0.7:
+            return "αγνωστη πρόθεση"
+        return predicted_intent
