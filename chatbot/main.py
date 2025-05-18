@@ -9,7 +9,7 @@ if __name__ == "__main__":
     while True:
         user_input = input("Εσυ:")
         if user_input.lower() == "εξοδος":
-            print("Chatbot:Τα λεμε!")
+            print("Eliza:Τα λεμε!")
             break
         response = chatbot.get_response(user_input)
-        print("Chatbot:",response)
+        print("Eliza:",response)

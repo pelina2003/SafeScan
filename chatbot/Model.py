@@ -1,11 +1,14 @@
 from NLPProcessor import NLPProcessor
 import joblib
-from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
+import logging
+
+logging.basicConfig(filename='model_predictions.log',level=logging.INFO,encoding='utf-8')
 
 class Model:
     def __init__(self):
-        self.vectorizer = TfidfVectorizer()
+        self.vectorizer = CountVectorizer()
         self.model = MultinomialNB()
         
     def train(self,patterns,labels):
@@ -28,6 +31,7 @@ class Model:
         max_prob = max(probabilities)
         predicted_index = probabilities.argmax()
         predicted_intent = self.model.classes_[predicted_index]
-        if max_prob <0.3:
+        logging.info(f"Input: {user_input}, Cleaned: {cleaned_input}, Probabilities: {probabilities}, Max Prob: {max_prob}, Predicted Intent: {predicted_intent}")
+        if max_prob <0.4:
             return "αγνωστη_πρόθεση"
         return predicted_intent
