@@ -106,7 +106,7 @@ class StatFilterForm:
 
         tk.Label(self.frame, text="Κατηγορία").pack()
         ttk.Combobox(self.frame, textvariable=self.category_var,
-                     values=["Εγκληματικότητα", "Φυσικές Καταστροφές", "Πυρκαγιές", "Κοινωνικά Ζητήματα"]).pack()
+                     values=["Πυρκαγιά", "Πλημμύρα", "Φυσική καταστροφή", "Κοινωνικά Ζητήματα"]).pack()
 
         tk.Label(self.frame, text="Τύπος Διαγράμματος").pack()
         ttk.Combobox(self.frame, textvariable=self.chart_type_var,
