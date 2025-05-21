@@ -60,7 +60,6 @@ class CameraSystem:
         return cap
 
     def takePhoto(self, cap):
-        messagebox.showinfo("Οδηγία", "Πατήστε SPACE για λήψη ή ESC για ακύρωση.")
         photo_taken = False
         path = None
         while True:
@@ -69,9 +68,9 @@ class CameraSystem:
                 break
             cv2.imshow("Λήψη Φωτογραφίας", frame)
             key = cv2.waitKey(1)
-            if key == 27:
+            if key == 27:  # ESC
                 break
-            elif key == 32:
+            elif key == 32:  # SPACE
                 path = "captured_photo.jpg"
                 cv2.imwrite(path, frame)
                 photo_taken = True
@@ -144,14 +143,6 @@ class ReportController:
         self._db.saveReport(report)
         return report
 
-# === Entity ===
-class ConfirmationMessage:
-    def __init__(self, text):
-        self.text = text
-
-    def display(self):
-        messagebox.showinfo("Επιβεβαίωση", self.text)
-
 # === GUI ===
 class ReportCardApp:
     def __init__(self, root):
@@ -192,7 +183,7 @@ class ReportCardApp:
 
     def takePhoto(self):
         if not self.camera.requestPermission():
-            messagebox.showinfo("Άρνηση Άδειας", "Η πρόσβαση στην κάμερα απορρίφθηκε. Δεν θα ληφθεί φωτογραφία.")
+            messagebox.showerror("Άδεια Κάμερας", "Απαιτείται άδεια για χρήση της κάμερας.")
             return
 
         cap = self.camera.activate()
@@ -221,34 +212,11 @@ class ReportCardApp:
         self.form.fillLocation(location)
 
         if not self.controller.checkRequiredFields(self.form.photo, self.form.comments, self.form.location):
-            messagebox.showerror("Σφάλμα", "Παρακαλώ συμπληρώστε όλα τα πεδία και προσθέστε φωτογραφία.")
+            messagebox.showerror("Σφάλμα", "Παρακαλώ συμπληρώστε όλα τα απαιτούμενα πεδία.")
             return
 
         self.form.submitForm(self.controller)
-        msg = ConfirmationMessage("Η αναφορά σας υποβλήθηκε με επιτυχία και βρίσκεται σε διαδικασία ελέγχου.")
-        msg.display()
-        SuccessWindow(self.root)
-
-# === Επιβεβαίωση ===
-class SuccessWindow:
-    def __init__(self, parent):
-        self.win = tk.Toplevel(parent)
-        self.win.title("Επιτυχία")
-        self.win.geometry("300x350")
-        self.win.configure(bg="white")
-        self.win.resizable(False, False)
-
-        tk.Label(self.win, text="Υποβολή Επιτεύχθηκε", font=("Arial", 14, "bold"), bg="white").pack(pady=(30, 10))
-
-        canvas = tk.Canvas(self.win, width=100, height=100, bg="white", highlightthickness=0)
-        canvas.pack()
-        canvas.create_oval(10, 10, 90, 90, fill="#4CAF50", outline="")
-        canvas.create_line(35, 55, 50, 70, width=5, fill="white")
-        canvas.create_line(50, 70, 75, 40, width=5, fill="white")
-
-        tk.Label(self.win, text="Η αναφορά βρίσκεται σε διαδικασία ελέγχου.", bg="white", font=("Arial", 10)).pack(pady=15)
-
-       
+        messagebox.showinfo("Επιβεβαίωση", "Η αναφορά υποβλήθηκε επιτυχώς και βρίσκεται σε διαδικασία ελέγχου.")
 
 # === Εκκίνηση ===
 if __name__ == "__main__":
