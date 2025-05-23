@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="refresh" content="30">
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_f00ce71821175cc4949aeb1474491743 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_f00ce71821175cc4949aeb1474491743" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_f00ce71821175cc4949aeb1474491743 = L.map(
+                "map_f00ce71821175cc4949aeb1474491743",
+                {
+                    center: [37.9838, 23.7275],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 7,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_710573770a2d495cae1564c0a6d59da3 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_710573770a2d495cae1564c0a6d59da3.addTo(map_f00ce71821175cc4949aeb1474491743);
+        
+    
+            var marker_063eecf0e7e2169c23496da05a876b13 = L.marker(
+                [37.9838, 23.7275],
+                {
+}
+            ).addTo(map_f00ce71821175cc4949aeb1474491743);
+        
+    
+            var icon_185c372f161e448b46af9e57fc95d3a0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4c622028d59f4c3899755432cfd41ace = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a697648a1d828d7766ee8ede87f752a8 = $(`<div id="html_a697648a1d828d7766ee8ede87f752a8" style="width: 100.0%; height: 100.0%;">Αναφορά #1 - Τύπος: Πυρκαγιά</div>`)[0];
+                popup_4c622028d59f4c3899755432cfd41ace.setContent(html_a697648a1d828d7766ee8ede87f752a8);
+            
+        
+
+        marker_063eecf0e7e2169c23496da05a876b13.bindPopup(popup_4c622028d59f4c3899755432cfd41ace)
+        ;
+
+        
+    
+    
+                marker_063eecf0e7e2169c23496da05a876b13.setIcon(icon_185c372f161e448b46af9e57fc95d3a0);
+            
+    
+            var marker_85cb99519f3cfb777adf8c8a2a6a4ff3 = L.marker(
+                [38.2466, 21.7346],
+                {
+}
+            ).addTo(map_f00ce71821175cc4949aeb1474491743);
+        
+    
+            var icon_b15d3d1604ac363d7c85ca95ea3c408e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_901c2376584fe7a42fd62b39e306d111 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e11fb54b2921108f076742ef04ca21c8 = $(`<div id="html_e11fb54b2921108f076742ef04ca21c8" style="width: 100.0%; height: 100.0%;">Αναφορά #2 - Τύπος: Πλημμύρα</div>`)[0];
+                popup_901c2376584fe7a42fd62b39e306d111.setContent(html_e11fb54b2921108f076742ef04ca21c8);
+            
+        
+
+        marker_85cb99519f3cfb777adf8c8a2a6a4ff3.bindPopup(popup_901c2376584fe7a42fd62b39e306d111)
+        ;
+
+        
+    
+    
+                marker_85cb99519f3cfb777adf8c8a2a6a4ff3.setIcon(icon_b15d3d1604ac363d7c85ca95ea3c408e);
+            
+    
+            var marker_c8d8647742455dfac81575e3d9e96e2c = L.marker(
+                [37.9838, 23.7275],
+                {
+}
+            ).addTo(map_f00ce71821175cc4949aeb1474491743);
+        
+    
+            var icon_f3f6e0944355c57dd4b936b9340323eb = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c861531e796a87abbb741478db7d9df7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b83618ffb5c8d8ea93edf37f74b4f449 = $(`<div id="html_b83618ffb5c8d8ea93edf37f74b4f449" style="width: 100.0%; height: 100.0%;">Αναφορά #3 - Τύπος: Καθαρισμός</div>`)[0];
+                popup_c861531e796a87abbb741478db7d9df7.setContent(html_b83618ffb5c8d8ea93edf37f74b4f449);
+            
+        
+
+        marker_c8d8647742455dfac81575e3d9e96e2c.bindPopup(popup_c861531e796a87abbb741478db7d9df7)
+        ;
+
+        
+    
+    
+                marker_c8d8647742455dfac81575e3d9e96e2c.setIcon(icon_f3f6e0944355c57dd4b936b9340323eb);
+            
+    
+            var marker_41757f1cc79e8e46301c65e4236a17c1 = L.marker(
+                [40.6401, 22.9444],
+                {
+}
+            ).addTo(map_f00ce71821175cc4949aeb1474491743);
+        
+    
+            var icon_63fc1e619e6bf9001765243321f74f6a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_abef09790026daad0038a06a6e5ccce5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3019fcc8784d49c703d7fb8ffe8ad89e = $(`<div id="html_3019fcc8784d49c703d7fb8ffe8ad89e" style="width: 100.0%; height: 100.0%;">Αναφορά #4 - Τύπος: Ατύχημα</div>`)[0];
+                popup_abef09790026daad0038a06a6e5ccce5.setContent(html_3019fcc8784d49c703d7fb8ffe8ad89e);
+            
+        
+
+        marker_41757f1cc79e8e46301c65e4236a17c1.bindPopup(popup_abef09790026daad0038a06a6e5ccce5)
+        ;
+
+        
+    
+    
+                marker_41757f1cc79e8e46301c65e4236a17c1.setIcon(icon_63fc1e619e6bf9001765243321f74f6a);
+            
+    
+            var marker_e0b7246ad0189e899ebe5eb6c7c19b4b = L.marker(
+                [37.9838, 23.7275],
+                {
+}
+            ).addTo(map_f00ce71821175cc4949aeb1474491743);
+        
+    
+            var icon_50473c15c02778e12855cb8ede764d9e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_df398396dd59640ad6f1e921adf23453 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_08fe8abd9852dccefa75d9095f59fdbc = $(`<div id="html_08fe8abd9852dccefa75d9095f59fdbc" style="width: 100.0%; height: 100.0%;">Αναφορά #5 - Τύπος: Πυρκαγιά</div>`)[0];
+                popup_df398396dd59640ad6f1e921adf23453.setContent(html_08fe8abd9852dccefa75d9095f59fdbc);
+            
+        
+
+        marker_e0b7246ad0189e899ebe5eb6c7c19b4b.bindPopup(popup_df398396dd59640ad6f1e921adf23453)
+        ;
+
+        
+    
+    
+                marker_e0b7246ad0189e899ebe5eb6c7c19b4b.setIcon(icon_50473c15c02778e12855cb8ede764d9e);
+            
+    
+            var marker_3a08a0427fd3e53424e2a009d270b7bc = L.marker(
+                [38.2466, 21.7346],
+                {
+}
+            ).addTo(map_f00ce71821175cc4949aeb1474491743);
+        
+    
+            var icon_85cf9ef08f918372c0c042bb1f228429 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9a8104a620d9ccda778a27430038bf5c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7364d923b642d95fed2c040149aad2d2 = $(`<div id="html_7364d923b642d95fed2c040149aad2d2" style="width: 100.0%; height: 100.0%;">Αναφορά #6 - Τύπος: Πλημμύρα</div>`)[0];
+                popup_9a8104a620d9ccda778a27430038bf5c.setContent(html_7364d923b642d95fed2c040149aad2d2);
+            
+        
+
+        marker_3a08a0427fd3e53424e2a009d270b7bc.bindPopup(popup_9a8104a620d9ccda778a27430038bf5c)
+        ;
+
+        
+    
+    
+                marker_3a08a0427fd3e53424e2a009d270b7bc.setIcon(icon_85cf9ef08f918372c0c042bb1f228429);
+            
+    
+            var marker_cf9943381883b9c224531454e5fb2a73 = L.marker(
+                [40.6401, 22.9444],
+                {
+}
+            ).addTo(map_f00ce71821175cc4949aeb1474491743);
+        
+    
+            var icon_75b7cdf377713fe890b067106c5b2d07 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b734ab987e0bc673539f43a77bd635be = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d883f5d1ecd38426d5def1cafe742cef = $(`<div id="html_d883f5d1ecd38426d5def1cafe742cef" style="width: 100.0%; height: 100.0%;">Αναφορά #8 - Τύπος: Ατύχημα</div>`)[0];
+                popup_b734ab987e0bc673539f43a77bd635be.setContent(html_d883f5d1ecd38426d5def1cafe742cef);
+            
+        
+
+        marker_cf9943381883b9c224531454e5fb2a73.bindPopup(popup_b734ab987e0bc673539f43a77bd635be)
+        ;
+
+        
+    
+    
+                marker_cf9943381883b9c224531454e5fb2a73.setIcon(icon_75b7cdf377713fe890b067106c5b2d07);
+            
+    
+            var marker_926202b8690f5db1e3aec2cfc6699e93 = L.marker(
+                [37.9838, 23.7275],
+                {
+}
+            ).addTo(map_f00ce71821175cc4949aeb1474491743);
+        
+    
+            var icon_92ed17b8f01242423f66cd823978dd6a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_120eb66070f189eaac5692d0dd32e2a6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6322edb0a1c0a27cf4f8c2a3985287ed = $(`<div id="html_6322edb0a1c0a27cf4f8c2a3985287ed" style="width: 100.0%; height: 100.0%;">Αναφορά #9 - Τύπος: Πυρκαγιά</div>`)[0];
+                popup_120eb66070f189eaac5692d0dd32e2a6.setContent(html_6322edb0a1c0a27cf4f8c2a3985287ed);
+            
+        
+
+        marker_926202b8690f5db1e3aec2cfc6699e93.bindPopup(popup_120eb66070f189eaac5692d0dd32e2a6)
+        ;
+
+        
+    
+    
+                marker_926202b8690f5db1e3aec2cfc6699e93.setIcon(icon_92ed17b8f01242423f66cd823978dd6a);
+            
+    
+            var marker_df0f50e2c2596c15e5a0d977e1375b90 = L.marker(
+                [38.2466, 21.7346],
+                {
+}
+            ).addTo(map_f00ce71821175cc4949aeb1474491743);
+        
+    
+            var icon_5e49f09aba0c2d3ffce8b277ec300a15 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7e5cd9ebe62d0a5c8cb5779ca9ed02f3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ce88bbdfee0294d096c5caec135e0332 = $(`<div id="html_ce88bbdfee0294d096c5caec135e0332" style="width: 100.0%; height: 100.0%;">Αναφορά #10 - Τύπος: Πλημμύρα</div>`)[0];
+                popup_7e5cd9ebe62d0a5c8cb5779ca9ed02f3.setContent(html_ce88bbdfee0294d096c5caec135e0332);
+            
+        
+
+        marker_df0f50e2c2596c15e5a0d977e1375b90.bindPopup(popup_7e5cd9ebe62d0a5c8cb5779ca9ed02f3)
+        ;
+
+        
+    
+    
+                marker_df0f50e2c2596c15e5a0d977e1375b90.setIcon(icon_5e49f09aba0c2d3ffce8b277ec300a15);
+            
+    
+            var marker_7e39e77bf6c600dd2ba36bce31f7901b = L.marker(
+                [40.6401, 22.9444],
+                {
+}
+            ).addTo(map_f00ce71821175cc4949aeb1474491743);
+        
+    
+            var icon_2077f2dfd4bcbcc4bf1a19e303b96aea = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2f04bf527933ea2bde293e472dc8fca8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ea56980925be19faa5da1a5284bb52b8 = $(`<div id="html_ea56980925be19faa5da1a5284bb52b8" style="width: 100.0%; height: 100.0%;">Αναφορά #12 - Τύπος: Ατύχημα</div>`)[0];
+                popup_2f04bf527933ea2bde293e472dc8fca8.setContent(html_ea56980925be19faa5da1a5284bb52b8);
+            
+        
+
+        marker_7e39e77bf6c600dd2ba36bce31f7901b.bindPopup(popup_2f04bf527933ea2bde293e472dc8fca8)
+        ;
+
+        
+    
+    
+                marker_7e39e77bf6c600dd2ba36bce31f7901b.setIcon(icon_2077f2dfd4bcbcc4bf1a19e303b96aea);
+            
+</script>
+</html>
