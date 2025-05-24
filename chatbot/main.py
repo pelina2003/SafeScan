@@ -9,12 +9,7 @@ if __name__ == "__main__":
     while True:
         user_input = input("Εσυ:")
         if user_input.lower() == "εξοδος":
-            print("Chatbot:Τα λεμε!")
+            print("Eliza:Τα λεμε!")
             break
         response = chatbot.get_response(user_input)
-        print("Chatbot:",response)
-
-def compute_file_hash(filename):
-        with open(filename, "rb") as f:
-            content = f.read()
-        return hashlib.sha256(content).hexdigest()
+        print("Eliza:",response)
