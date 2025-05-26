@@ -2,10 +2,10 @@ import spacy
 
 class NLPProcessor:
     def __init__(self,language_model="el_core_news_sm"):
-        self.nlp = spacy.load(language_model)
+        self._nlp = spacy.load(language_model)
 
     def nlp_process(self,text):
-        doc = self.nlp(text)
+        doc = self._nlp(text)
         tokens = [ 
             token.lemma_.lower() 
             for token in doc

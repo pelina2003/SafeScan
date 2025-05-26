@@ -35,6 +35,19 @@ class ChatbotGUI:
             self.chat_log.yview(tk.END)
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     root = tk.Tk()
     gui = ChatbotGUI(root)
     root.mainloop()
+=======
+    chatbot = Chatbot("intents.json")
+
+    print("Γεια σου! Πως μπορω να σε βοηθήσω; ")
+    while True:
+        user_input = input("Εσυ:")
+        if user_input.lower() == "εξοδος":
+            print("Eliza:Τα λεμε!")
+            break
+        response = chatbot.get_response(user_input)
+        print("Eliza:",response)
+>>>>>>> 86c0552ef04346985cd06b11d57d45439603cda8
