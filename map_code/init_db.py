@@ -1,10 +1,8 @@
+# init_db.py
 import sqlite3
 import os
 
-# Δημιουργία φακέλου data αν δεν υπάρχει
 os.makedirs("data", exist_ok=True)
-
-# Σύνδεση στη βάση δεδομένων
 conn = sqlite3.connect("data/dummy_data.db")
 cursor = conn.cursor()
 
@@ -19,21 +17,20 @@ CREATE TABLE IF NOT EXISTS reports (
 )
 """)
 
-# Προσθήκη δειγμάτων αν ο πίνακας είναι άδειος
+# Δείγματα μόνο αν η βάση είναι άδεια
 cursor.execute("SELECT COUNT(*) FROM reports")
 count = cursor.fetchone()[0]
 
 if count == 0:
     sample_data = [
-        ("Πυρκαγιά", 37.9838, 23.7275, "pending"),
-        ("Πλημμύρα", 38.2466, 21.7346, "pending"),
-        ("Καθαρισμός", 37.9838, 23.7275, "pending"),
-        ("Ατύχημα", 40.6401, 22.9444, "pending")
+        ("Πυρκαγιά", 37.9838, 23.7275, "confirmed"),
+        ("Πλημμύρα", 38.2466, 21.7346, "confirmed"),
+        ("Ατύχημα", 40.6401, 22.9444, "confirmed")
     ]
-    cursor.executemany("INSERT INTO reports (report_type, latitude, longitude, status) VALUES (?, ?, ?, ?)", sample_data)
-    print("✅ Η βάση δημιουργήθηκε με δείγματα.")
+    cursor.executemany("INSERT INTO reports (type, latitude, longitude, status) VALUES (?, ?, ?, ?)", sample_data)
+    print("✅ Προστέθηκαν επιβεβαιωμένα δείγματα στη βάση.")
 else:
-    print("ℹ️ Η βάση υπάρχει ήδη με δεδομένα.")
+    print("ℹ️ Η βάση περιέχει ήδη δεδομένα.")
 
 conn.commit()
 conn.close()
