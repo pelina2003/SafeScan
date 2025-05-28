@@ -1,34 +1,56 @@
-import tkinter as tk 
+import tkinter as tk
 from tkinter import ttk, messagebox
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import sqlite3
+from dataclasses import dataclass
+from typing import List
 
-# === Domain ===
+# === Οντότητες ===
 
+@dataclass
+class DateRange:
+    start: str
+    end: str
+
+@dataclass
+class StatisticalData:
+    category: str
+    region: str
+    dateRange: DateRange
+    count: int
+
+    def getCount(self) -> int:
+        return self.count
+
+@dataclass
 class FilterSelection:
-    def __init__(self, category, chart_type, region, time_range="2023"):
-        self.category = category
-        self.chart_type = chart_type
-        self.region = region
-        self.time_range = time_range
+    category: str
+    type: str
+    format: str
+    region: str
+    dateRange: DateRange
+
+# === Chart ===
 
 class Chart:
-    def __init__(self, title, chart_type, data):
-        self.title = title
-        self.chart_type = chart_type
+    def __init__(self, chart_type: str, chart_format: str, data: List[StatisticalData]):
+        self.type = chart_type
+        self.format = chart_format
         self.data = data
 
     def render(self):
         fig, ax = plt.subplots(figsize=(6, 4))
-        if self.chart_type == "bar":
-            ax.bar(self.data.keys(), self.data.values(), color='skyblue')
+        labels = [d.dateRange.start for d in self.data]
+        values = [d.getCount() for d in self.data]
+        if self.type == "bar":
+            ax.bar(labels, values, color='skyblue')
             ax.set_xlabel("Έτος ή Μήνας")
             ax.set_ylabel("Αριθμός Αναφορών")
             ax.yaxis.get_major_locator().set_params(integer=True)
-        elif self.chart_type == "pie":
-            ax.pie(self.data.values(), labels=self.data.keys(), autopct='%1.1f%%')
-        ax.set_title(self.title)
+        elif self.type == "pie":
+            ax.pie(values, labels=labels, autopct='%1.1f%%')
+        ax.set_title("Στατιστικά Αναφορών")
         return fig
 
     def export(self, path):
@@ -39,7 +61,6 @@ class Chart:
 
 class StatisticsDisplay:
     def __init__(self, root):
-        self.root = root
         self.frame = tk.Frame(root)
         self.frame.pack()
 
@@ -67,7 +88,7 @@ class StatisticsController:
         cursor.execute("""
             SELECT COUNT(*) FROM confirmed_reports
             WHERE category = ? AND region = ? AND date LIKE ? AND status = 'confirmed'
-        """, (selection.category, selection.region, f"{selection.time_range}%"))
+        """, (selection.category, selection.region, f"{selection.dateRange.start}%"))
         count = cursor.fetchone()[0]
         conn.close()
         return count > 0
@@ -77,7 +98,7 @@ class StatisticsController:
         if not data:
             self.display.displayError("Δεν βρέθηκαν διαθέσιμα δεδομένα για τα επιλεγμένα φίλτρα. Παρακαλώ τροποποιήστε τις επιλογές σας.")
             return None
-        return Chart(f"{selection.category} - {selection.region}", selection.chart_type, data)
+        return Chart(selection.type, selection.format, data)
 
     def fetchData(self, selection: FilterSelection):
         conn = sqlite3.connect(self.db_name)
@@ -87,12 +108,13 @@ class StatisticsController:
             WHERE category = ? AND region = ? AND date LIKE ? AND status = 'confirmed'
             GROUP BY date
             ORDER BY date
-        """, (selection.category, selection.region, f"{selection.time_range}%"))
+        """, (selection.category, selection.region, f"{selection.dateRange.start}%"))
         rows = cursor.fetchall()
         conn.close()
-        return {row[0]: row[1] for row in rows} if rows else {}
+        return [StatisticalData(selection.category, selection.region, DateRange(date, date), count)
+                for date, count in rows]
 
-# === Φόρμα επιλογής φίλτρων ===
+# === Φόρμα ===
 
 class StatFilterForm:
     def __init__(self, parent, controller):
@@ -120,9 +142,10 @@ class StatFilterForm:
     def submitFilters(self):
         selection = FilterSelection(
             category=self.category_var.get(),
-            chart_type=self.chart_type_var.get(),
-            region=self.region_var.get()
-            # time_range δίνεται default από το constructor (2023)
+            type=self.chart_type_var.get(),
+            format="png",
+            region=self.region_var.get(),
+            dateRange=DateRange("2023", "2023")
         )
         if self.controller.checkData(selection):
             chart = self.controller.generateChart(selection)
@@ -131,7 +154,7 @@ class StatFilterForm:
         else:
             self.controller.display.displayError("Δεν βρέθηκαν διαθέσιμα δεδομένα για τα επιλεγμένα φίλτρα. Παρακαλώ τροποποιήστε τις επιλογές σας.")
 
-# === Εκκίνηση εφαρμογής ===
+# === Εκκίνηση GUI ===
 
 def start_statistics_gui():
     root = tk.Tk()
