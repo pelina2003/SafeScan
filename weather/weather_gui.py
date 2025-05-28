@@ -153,9 +153,3 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = WeatherApp(root)
     root.mainloop()
-"""
-
-with open(simplified_gui_code_path, "w", encoding="utf-8") as f:
-    f.write(simplified_gui_code)
-
-simplified_gui_code_path
