@@ -4,50 +4,43 @@ from Chatbot import Chatbot
 class ChatbotGUI:
     def __init__(self, root):
         self.root = root
-        self.root.title("Eliza - Chatbot")
-        self.root.geometry("500x600")
-        
-        self.chatbot = Chatbot("intents.json")
+        self.root.title("Eliza Chatbot")
+        self.root.geometry("600x500")
+        self.root.configure(bg="white")
 
-        self.chat_log = tk.Text(root, bd=1, bg="white", height=20, width=50, wrap="word")
-        self.chat_log.config(state=tk.DISABLED)
-        self.chat_log.pack(pady=10)
+        self.chatbot = Chatbot("c:/Users/FOTEINI TZOUMANI/Desktop/git/SafeScan/chatbot/intents.json")
 
-        self.entry_box = tk.Entry(root, bd=1, bg="lightgray", width=40)
-        self.entry_box.pack(pady=10, padx=10, side=tk.LEFT, expand=True, fill=tk.X)
+        # Περιοχή συνομιλίας (μη επεξεργάσιμη)
+        self.chat_display = tk.Text(root, bg="white", fg="black", font=("Arial", 12), wrap="word", state=tk.DISABLED)
+        self.chat_display.pack(padx=10, pady=10, fill=tk.BOTH, expand=True)
 
-        self.send_button = tk.Button(root, text="Στείλε", command=self.send_message)
-        self.send_button.pack(padx=10, pady=10, side=tk.RIGHT)
+        # Περιοχή εισαγωγής
+        self.user_input = tk.Entry(root, font=("Arial", 12))
+        self.user_input.pack(side=tk.LEFT, padx=(10, 0), pady=10, fill=tk.X, expand=True)
+        self.user_input.bind("<Return>", lambda event: self.send_message())
 
-        self.chat_log.config(state=tk.NORMAL)
-        self.chat_log.insert(tk.END, "Eliza: Γεια σου! Πως μπορώ να σε βοηθήσω;\n")
-        self.chat_log.config(state=tk.DISABLED)
+        # Κουμπί αποστολής
+        send_button = tk.Button(root, text="Στείλε", font=("Arial", 12), command=self.send_message, bg="#4CAF50", fg="white")
+        send_button.pack(side=tk.RIGHT, padx=10, pady=10)
+
+        # Μήνυμα έναρξης
+        self.insert_message("Eliza", "Γεια σου! Πώς μπορώ να σε βοηθήσω;")
+
+    def insert_message(self, sender, message):
+        self.chat_display.config(state=tk.NORMAL)
+        self.chat_display.insert(tk.END, f"{sender}: {message}\n\n")
+        self.chat_display.config(state=tk.DISABLED)
+        self.chat_display.see(tk.END)
 
     def send_message(self):
-        user_input = self.entry_box.get()
-        if user_input.strip():
-            self.chat_log.config(state=tk.NORMAL)
-            self.chat_log.insert(tk.END, f"Εσύ: {user_input}\n")
-            response = self.chatbot.get_response(user_input)
-            self.chat_log.insert(tk.END, f"Eliza: {response}\n\n")
-            self.chat_log.config(state=tk.DISABLED)
-            self.entry_box.delete(0, tk.END)
-            self.chat_log.yview(tk.END)
+        user_text = self.user_input.get().strip()
+        if user_text:
+            self.insert_message("Εσύ", user_text)
+            response = self.chatbot.get_response(user_text)
+            self.insert_message("Eliza", response)
+            self.user_input.delete(0, tk.END)
 
 if __name__ == "__main__":
-<<<<<<< HEAD
     root = tk.Tk()
     gui = ChatbotGUI(root)
     root.mainloop()
-=======
-    chatbot = Chatbot("intents.json")
-
-    print("Γεια σου! Πως μπορω να σε βοηθήσω; ")
-    while True:
-        user_input = input("Εσυ:")
-        if user_input.lower() == "εξοδος":
-            print("Eliza:Τα λεμε!")
-            break
-        response = chatbot.get_response(user_input)
-        print("Eliza:",response)
->>>>>>> 86c0552ef04346985cd06b11d57d45439603cda8
