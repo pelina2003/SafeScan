@@ -20,7 +20,12 @@ class SocialActionApp:
         self._current_user = User(1, "test_user")
 
         self._reports = [
+            Report(1, "Κατεστραμμένη παιδική χαρά", "Υποδομές"),
+            Report(2, "Σκουπίδια στο πάρκο", "Περιβάλλον"),
+            Report(3, "Σπασμένη λάμπα σε δρόμο", "Ηλεκτροφωτισμός"),
+            Report(4, "Διαρροή νερού σε δημόσιο χώρο", "Ύδρευση"),
         ]
+
 
         self._pool = DonationPool()
         self._style = ttk.Style()
