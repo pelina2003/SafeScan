@@ -1,4 +1,7 @@
-from map_display import create_risk_map
+# main.py
+from map_view import MapView
+from user import User
 
 if __name__ == "__main__":
-    create_risk_map()
+    user = User("guest")
+    MapView(user)

@@ -1,3 +1,0 @@
-from forum_manager import scan_reports_and_create_forums
-
-scan_reports_and_create_forums()
