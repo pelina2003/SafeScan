@@ -23,13 +23,13 @@ class EnvironmentalOrganization:
         return self.name
 
 class User:
-    def __init__(self, userId: int, username: str, email: str):
-        self.userId = userId
-        self.username = username
+    def __init__(self, id: int, name: str, email: str):
+        self.id = id
+        self.name = name
         self.email = email
 
-    def getUserName(self) -> str:
-        return self.username
+    def getName(self) -> str:
+        return self.name
 
 # === Δημιουργία ή σύνδεση με τη βάση δεδομένων ===
 
@@ -126,7 +126,7 @@ def save_donation(amount: float, status: str, payment_method: str,
         amount,
         status,
         payment_method,
-        user.getUserName(),
+        user.getName(),
         datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         socialActionId if socialActionId is not None else None,
         environmentalOrgId if environmentalOrgId is not None else None
@@ -134,3 +134,4 @@ def save_donation(amount: float, status: str, payment_method: str,
 
     conn.commit()
     conn.close()
+

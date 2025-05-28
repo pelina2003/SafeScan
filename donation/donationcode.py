@@ -10,14 +10,14 @@ class Status(Enum):
 
 # Κλάση User
 class User:
-    def __init__(self, userId: int, username: str, email: str):
-        self.userId = userId
-        self.username = username
+    def __init__(self, id: int, name: str, email: str):
+        self.id = id
+        self.name = name
         self.email = email
-        self.donations: List[Donation] = []
+        self.donations: List['Donation'] = []
 
-    def getUserName(self) -> str:
-        return self.username
+    def getName(self) -> str:
+        return self.name
 
     def getEmail(self) -> str:
         return self.email
@@ -94,4 +94,3 @@ class Donation:
 
     def getStatus(self) -> Status:
         return self.status
-

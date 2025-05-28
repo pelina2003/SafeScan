@@ -12,14 +12,14 @@ class Status(Enum):
 
 # Κλάση Χρήστη
 class User:
-    def __init__(self, userId: int, username: str, email: str):
-        self.userId = userId
-        self.username = username
+    def __init__(self, id: int, name: str, email: str):
+        self.id = id
+        self.name = name
         self.email = email
         self.donations: List['Donation'] = []
 
-    def getUserName(self) -> str:
-        return self.username
+    def getName(self) -> str:
+        return self.name
 
     def getEmail(self) -> str:
         return self.email
@@ -101,7 +101,6 @@ class Donation:
 # GUI ΜΕΡΟΣ
 # ---------------------------------------------------
 
-# Δημιουργία παραδειγματικού χρήστη και επιλογών
 user = User(1, "user1", "user1@example.com")
 paymentSystem = PaymentSystem("Credit Card", 1000.0)
 options = [
@@ -127,7 +126,7 @@ def open_donation_window():
     amount_entry = tk.Entry(donation_window, width=20, font=("Arial", 12))
     amount_entry.pack(pady=5)
 
-    # Ασφαλής έλεγχος τύπου
+    # Προβολή στόχου
     if isinstance(selected_option, SocialAction):
         target_text = selected_option.getTitle()
     elif isinstance(selected_option, EnvironmentalOrganization):
@@ -180,3 +179,4 @@ for i, option in enumerate(options):
     tk.Button(window, text=text, width=50, command=lambda idx=i: select_option(idx), font=("Arial", 12)).pack(pady=5)
 
 window.mainloop()
+
