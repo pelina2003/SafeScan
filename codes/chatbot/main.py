@@ -8,7 +8,7 @@ class ChatbotGUI:
         self.root.geometry("600x500")
         self.root.configure(bg="white")
 
-        self.chatbot = Chatbot("c:/Users/FOTEINI TZOUMANI/Desktop/git/SafeScan/chatbot/intents.json")
+        self.chatbot = Chatbot("c:/Users/FOTEINI TZOUMANI/Desktop/git/SafeScan/codes/chatbot/intents.json")
 
         # Περιοχή συνομιλίας (μη επεξεργάσιμη)
         self.chat_display = tk.Text(root, bg="white", fg="black", font=("Arial", 12), wrap="word", state=tk.DISABLED)
