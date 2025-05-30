@@ -134,4 +134,3 @@ def save_donation(amount: float, status: str, payment_method: str,
 
     conn.commit()
     conn.close()
-

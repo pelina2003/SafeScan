@@ -1,22 +1,20 @@
+import tkinter as tk
+from tkinter import messagebox
 from typing import List
 
 
-# -------------------------------
-# Κλάση User
 class User:
-    def __init__(self, username: str, location: str):
-        self.username = username
+    def __init__(self, name: str, location: str):
+        self.name = name
         self.location = location
 
     def getLocation(self) -> str:
         return self.location
 
     def notify(self, message: str):
-        print(f"🔔 [{self.username}] Ειδοποίηση: {message}")
+        messagebox.showinfo(f"Ειδοποίηση για {self.username}", message)
 
 
-# -------------------------------
-# Κλάση WeatherEvent
 class WeatherEvent:
     def __init__(self, event_type: str, location: str):
         self.event_type = event_type
@@ -29,20 +27,17 @@ class WeatherEvent:
         return self.event_type
 
 
-# -------------------------------
-# Κλάση RiskAssessment
 class RiskAssessment:
     def __init__(self):
         self.risk_percentage = 0.0
 
     def assessRisk(self, event: WeatherEvent):
-        event_type = event.getType()
-        if event_type == "heatwave":
+        if event.getType() == "heatwave":
             self.risk_percentage = 85.0
-        elif event_type == "storm":
-            self.risk_percentage = 60.0
-        elif event_type == "rain":
-            self.risk_percentage = 30.0
+        elif event.getType() == "storm":
+            self.risk_percentage = 65.0
+        elif event.getType() == "rain":
+            self.risk_percentage = 40.0
         else:
             self.risk_percentage = 10.0
 
@@ -50,8 +45,6 @@ class RiskAssessment:
         return self.risk_percentage
 
 
-# -------------------------------
-# Κλάση Warning
 class Warning:
     def __init__(self, event: WeatherEvent, risk: RiskAssessment):
         self.event = event
@@ -61,20 +54,17 @@ class Warning:
         return f"{self.event.getType().upper()} στην {self.event.getLocation()} - Κίνδυνος: {self.risk.getRiskPercentage()}%"
 
 
-# -------------------------------
-# Κλάση ProtectionAdvice
 class ProtectionAdvice:
     def __init__(self):
         self.advice_text = ""
 
     def generateAdvice(self, event: WeatherEvent):
-        event_type = event.getType()
-        if event_type == "heatwave":
+        if event.getType() == "heatwave":
             self.advice_text = "Αποφύγετε την έκθεση στον ήλιο."
-        elif event_type == "storm":
+        elif event.getType() == "storm":
             self.advice_text = "Μείνετε σε ασφαλές μέρος."
-        elif event_type == "rain":
-            self.advice_text = "Οδηγείτε με προσοχή σε βροχή."
+        elif event.getType() == "rain":
+            self.advice_text = "Προσέχετε σε περιοχές με ολισθηρότητα."
         else:
             self.advice_text = "Καμία ειδική οδηγία."
 
@@ -82,66 +72,93 @@ class ProtectionAdvice:
         return self.advice_text
 
 
-# -------------------------------
-# Κλάση Database
 class Database:
     def __init__(self):
         self.saved_events: List[WeatherEvent] = []
 
     def storeEvent(self, event: WeatherEvent):
-        print(f"💾 Αποθηκεύτηκε: {event.getType()} στην {event.getLocation()}")
         self.saved_events.append(event)
 
 
-# -------------------------------
-# Κλάση WeatherForecastPage
 class WeatherForecastPage:
+    def __init__(self, text_widget):
+        self.text_widget = text_widget
+
     def showForecast(self, warnings: List[Warning]):
+        self.text_widget.delete("1.0", tk.END)
         if not warnings:
-            print("✅ Ο καιρός τις επόμενες μέρες θα είναι ήπιος στην περιοχή σας.")
+            self.text_widget.insert(tk.END, "✅ Ο καιρός τις επόμενες μέρες θα είναι ήπιος στην περιοχή σας.\n")
         else:
-            print("⚠️ Προβλεπόμενα φαινόμενα:")
+            self.text_widget.insert(tk.END, "⚠️ Προβλεπόμενα φαινόμενα:\n")
             for warning in warnings:
-                print(f"- {warning.getWarningText()}")
+                self.text_widget.insert(tk.END, f"- {warning.getWarningText()}\n")
 
 
-# -------------------------------
-# Κλάση WeatherService
 class WeatherService:
     def __init__(self, database: Database):
         self.database = database
 
     def getWeatherData(self) -> List[WeatherEvent]:
-        # Προσομοίωση ανάκτησης δεδομένων από ΕΜΥ
         return [
             WeatherEvent("heatwave", "Athens"),
-            WeatherEvent("rain", "Patras")
+            WeatherEvent("rain", "Thessaloniki"),
+            WeatherEvent("storm", "Patras")
         ]
 
 
-# -------------------------------
-# Εκτέλεση Use Case
-user = User("Giannis", "Athens")
-database = Database()
-service = WeatherService(database)
-forecast_page = WeatherForecastPage()
+class WeatherController:
+    def __init__(self, root):
+        self.database = Database()
+        self.service = WeatherService(self.database)
+        self.user = User("andriana", "Athens")
 
-weather_data = service.getWeatherData()
-warnings: List[Warning] = []
+        self.root = root
+        self.root.title("Έλεγχος Καιρού")
+        self.root.geometry("600x400")
+        self.root.configure(bg="lightblue")
 
-for event in weather_data:
-    risk = RiskAssessment()
-    risk.assessRisk(event)
-    database.storeEvent(event)
+        self.result_text = tk.Text(root, height=10, width=70, font=("Arial", 12))
+        self.result_text.pack(pady=10)
 
-    if user.getLocation() == event.getLocation() and risk.getRiskPercentage() >= 35:
-        warning = Warning(event, risk)
-        user.notify(warning.getWarningText())
+        self.forecast_page = WeatherForecastPage(self.result_text)
 
+        self.button = tk.Button(
+            root, text="Έλεγχος Καιρού",
+            command=self.updateWeatherPage,
+            font=("Arial", 14), bg="white"
+        )
+        self.button.pack(pady=10)
+
+    def getWeatherForecast(self) -> List[WeatherEvent]:
+        return self.service.getWeatherData()
+
+    def assessRisk(self, event: WeatherEvent) -> RiskAssessment:
+        risk = RiskAssessment()
+        risk.assessRisk(event)
+        return risk
+
+    def notifyUsers(self, warning: Warning, event: WeatherEvent):
+        self.user.notify(warning.getWarningText())
         advice = ProtectionAdvice()
         advice.generateAdvice(event)
-        print(f"ℹ️ Συμβουλή: {advice.getAdviceText()}")
+        messagebox.showinfo("Συμβουλή Προστασίας", advice.getAdviceText())
 
-        warnings.append(warning)
+    def updateWeatherPage(self):
+        warnings: List[Warning] = []
 
-forecast_page.showForecast(warnings)
+        for event in self.getWeatherForecast():
+            risk = self.assessRisk(event)
+            self.database.storeEvent(event)
+
+            if event.getLocation() == self.user.getLocation() and risk.getRiskPercentage() > 35:
+                warning = Warning(event, risk)
+                self.notifyUsers(warning, event)
+                warnings.append(warning)
+
+        self.forecast_page.showForecast(warnings)
+
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    controller = WeatherController(root)
+    root.mainloop()
