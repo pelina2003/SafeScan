@@ -22,5 +22,7 @@ class ForumController:
         return DBManager.get_forum_messages(forum_id)
 
     def submit_message(self, forum_id, user, content):
+        if content.strip() == "":
+            return False  # Αν το μήνυμα είναι άδειο, απόρριψέ το
         success = DBManager.save_message(forum_id, user.username, content)
-        return success  # Εναλλακτική ροή 4 αν false
+        return success  # Εναλλακτική ροή 4 αν False
